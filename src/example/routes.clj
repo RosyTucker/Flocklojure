@@ -1,5 +1,5 @@
-(ns ask.routes
-  (:use [ask.handler :only [my-handler]])
+(ns example.routes
+  (:use [example.handler :only [my-handler]])
   (:require [compojure.core :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]))

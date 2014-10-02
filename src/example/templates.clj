@@ -1,4 +1,4 @@
-(ns ask.templates
+(ns example.templates
   (:require [clostache.parser :as clostache]))
 
 (defn read-template-file [template-name]

@@ -1,5 +1,5 @@
 (ns main
-    (:use [ask.routes :only [app]]
+    (:use [example.routes :only [app]]
           [org.httpkit.server :only [run-server]]))
 
 (defonce server (atom nil))
