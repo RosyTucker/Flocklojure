@@ -12,7 +12,7 @@
 
   :cljsbuild {
     :builds [{:id "flocking"
-              :source-paths ["src"]
+              :source-paths ["src/flocking"]
               :compiler {
                 :output-to "flocking.js"
                 :output-dir "out"

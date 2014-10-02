@@ -1,6 +1,6 @@
-(ns flocking.utils
+(ns flocking.utils)
 
-  (defn length [nodes]
+(defn length [nodes]
         (. nodes -length))
 
   (defn item [nodes n]
@@ -19,6 +19,5 @@
   (defn html [dom] (. dom -innerHTML))
 
   (defn set-html! [dom content]
-        (set! (. dom -innerHTML) content)))
-
+        (set! (. dom -innerHTML) content))
 

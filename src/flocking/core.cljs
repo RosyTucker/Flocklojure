@@ -1,5 +1,8 @@
-(ns flocking.core)
-
+(ns flocking.core
+(:use [flocking.utils :only [set-html! by-id]]))
 (enable-console-print!)
 
-(println "Hello world!")
+(defn ^:export flock []
+      (println "Hello world!")
+      (let [header (by-id :header)]
+           (set-html! header "Hello World")))
