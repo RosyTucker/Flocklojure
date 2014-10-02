@@ -7,6 +7,8 @@
                  [http-kit "2.1.5"]
                  [de.ubercode.clostache/clostache "1.4.0"]]
   :main main
-  :profiles
-  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring-mock "0.1.5"]]}})
+  :profiles {:dev
+              {:dependencies [[javax.servlet/servlet-api "2.5"]
+                              [ring-mock "0.1.5"]]}
+             :production
+              {:dependencies [[javax.servlet/servlet-api "2.5"]]}})
