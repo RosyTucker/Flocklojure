@@ -1,12 +1,6 @@
 (ns ask.handler
-  (:require [compojure.core :refer :all]
-            [compojure.handler :as handler]
-            [compojure.route :as route]))
+  (:require [clostache.parser :as template]))
 
-(defroutes app-routes
-  (GET "/" [] "Hello World")
-  (route/resources "/")
-  (route/not-found "Not Found"))
-
-(def app
-  (handler/site app-routes))
+(defn my-handler [request]
+  (template/render "Hello {{name}}!"
+                 {:name "Rosy"}))
