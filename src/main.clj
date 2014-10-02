@@ -1,9 +1,10 @@
 (ns main
-  (:use [ask.routes :only [app]]
-        [org.httpkit.server :only [run-server]]))
+    (:use [ask.routes :only [app]]
+          [org.httpkit.server :only [run-server]]))
 
 (defonce server (atom nil))
 
 (defn -main [& args]
-  (reset! server (run-server #'app {:port 8080}))
-  (println "Running server on 8080."))
+      (let [port (Integer/parseInt (get (System/getenv) "PORT" "8080"))]
+           (reset! server (run-server #'app {:port port}))
+           (println "Running server on port" port)))
