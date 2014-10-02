@@ -1,6 +1,7 @@
 (ns ask.handler
-  (:require [clostache.parser :as template]))
+  (:require [ask.templates :as templates]))
 
 (defn my-handler [request]
-  (template/render "Hello {{name}}!"
-                 {:name "Rosy"}))
+  (templates/render-template "home"
+                             {:name "Rosy"}))
+
