@@ -1,5 +1,6 @@
 # Ask - Live Feedback
-[![Build Status](https://travis-ci.org/London-Beach/ask.svg?branch=master)](https://travis-ci.org/London-Beach/ask)
+Staging: [![Build Status](https://travis-ci.org/London-Beach/ask.svg?branch=master)](https://travis-ci.org/London-Beach/ask)
+Production: [![Build Status](https://travis-ci.org/London-Beach/ask.svg?branch=production)](https://travis-ci.org/London-Beach/ask)
 
 Repository for the London 'Ask' project, designed to allow audience members to give live feedback during events. The app is currently available at http://ask-staging.herokuapp.com.
 
