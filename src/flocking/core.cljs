@@ -8,18 +8,21 @@
 (def time-step 50)
 (def dimensions {:width 1200 :height 800})
 
-(def initial-positions (map (fn [x] [(rand-int (dimensions :width)) (rand-int (dimensions :height))]) (range num-boids)))
+(defn boid-position [x y] {:x x :y y})
+
+(def initial-positions (map (fn [x] (boid-position (rand-int (dimensions :width)) (rand-int (dimensions :height)))) (range num-boids)))
 
 (defn render [positions]
       (let [canvas (utils/by-id :flocking-canvas) context (utils/get-context canvas "2d")]
            (utils/clear-canvas context dimensions)
            (doseq [position positions]
-                  (utils/fill-rect context (utils/rand-color) (nth position 0) (nth position 1) 10 10)))
+                  (utils/fill-rect context (utils/rand-color) (position :x) (position :y) 10 10)))
       positions)
 
-(defn update [positions] (map (fn [position] [(+ (rand-int 10) (nth position 0)) (+ (rand-int 10) (nth position 1))]) positions))
+(defn update [positions] (map (fn [position] (boid-position (+ 10 (position :x)) (+ 10 (position :y))) ) positions))
 
 (defn game-loop [positions] (utils/wait (fn [] (game-loop (render (update positions)))) time-step))
 
 (defn ^:export flock []
-      (game-loop initial-positions))
+      (game-loop initial-positions)
+      )
