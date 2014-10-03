@@ -7,8 +7,9 @@
 (def num-boids 1000)
 (def time-step 50)
 (def dimensions {:width 1200 :height 800})
-
 (defn boid-position [x y] {:x x :y y})
+(defn boid-velocity [dx dy] {:dx dx :dy dy})
+(defn boid [position velocity] {:position position :velocity velocity})
 
 (def initial-positions
   (map (fn [x](boid-position (rand-int (dimensions :width)) (rand-int (dimensions :height))))
@@ -25,5 +26,4 @@
 (defn game-loop [positions] (utils/wait (fn [] (game-loop (render (update positions)))) time-step))
 
 (defn ^:export flock []
-      (game-loop initial-positions)
-      )
+      (game-loop initial-positions))
