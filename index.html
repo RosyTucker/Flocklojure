@@ -1,10 +1,18 @@
 <html>
-    <body>
-        <script src="out/goog/base.js" type="text/javascript"></script>
-        <script src="flocking.js" type="text/javascript"></script>
-        <script type="text/javascript">goog.require("flocking.core");</script>
-        <script type="text/javascript">window.onload=function(){flocking.core.flock();}; </script>
-        <div id="header"></div>
-        <canvas id="canvas" width="800" height="500"></canvas>
-    </body>
+<body>
+<link href="public/stylesheets/application.css" rel="stylesheet" type="text/css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<script src="out/goog/base.js" type="text/javascript"></script>
+<script src="public/js/flocking.js" type="text/javascript"></script>
+<script type="text/javascript">goog.require("flocking.core");</script>
+<script type="text/javascript">window.onload=function(){flocking.core.flock();}; </script>
+
+<div class="container col-sm-10 col-sm-offset-1 text-center">
+    <div id="header"></div>
+    <div class="col-sm-12">
+        <canvas id="flocking-canvas" width="1200" height="700"></canvas>
+    </div>
+</div>
+
+</body>
 </html>

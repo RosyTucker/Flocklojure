@@ -14,7 +14,7 @@
     :builds [{:id "flocking"
               :source-paths ["src/flocking"]
               :compiler {
-                :output-to "flocking.js"
+                :output-to "public/js/flocking.js"
                 :output-dir "out"
                 :optimizations :none
                 :source-map true}}]})

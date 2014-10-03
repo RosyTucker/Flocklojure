@@ -1,5 +1,14 @@
 (ns flocking.utils)
 
+
+(defn clear-canvas
+      [ctx dimensions]
+      (.save ctx)
+      (.setTransform ctx 1 0 0 1 0 0)
+      (.clearRect ctx 0 0 (dimensions :width) (dimensions :height))
+      (.restore ctx))
+
+
 (defn length [nodes]
       (. nodes -length))
 
@@ -24,5 +33,9 @@
 (defn get-context [target dim]
       (.getContext target "2d"))
 
-(defn fill-rect [context left top width height]
+(defn fill-rect [context r g b left top width height]
+      (set! (.-fillStyle context) (str "rgb(" r "," g "," b ")"))
       (.fillRect context left top width height))
+
+(defn wait [update timestep]
+      (js/setTimeout update timestep))

@@ -1,20 +1,31 @@
 (ns flocking.core
-  (:require [flocking.utils :as utils]))
+  (:require [flocking.utils :as utils])
+  (:import [java.lang.Integer]))
 (enable-console-print!)
+
+(def num-boids 1000)
+(def time-step 1000)
+
+(def dimensions {:width 1200 :height 800})
+
+(def initial-positions (map (fn [x] [(rand-int (dimensions :width)) (rand-int (dimensions :height))]) (range num-boids)))
 
 (defn header []
       (let [header (utils/by-id :header)]
            (utils/set-html! header "Hello World")))
 
-(defn canvas []
-      (let [target (utils/by-id :canvas)
-            context (utils/get-context target "2d")]
-           (loop [x 80]
-                 (when (> x 0)
-                 (println x)
-                 (utils/fill-rect context (+ x 100) (+ x 50) x x)
-                 (recur (dec x))))))
+(defn render [positions]
+      (let [canvas (utils/by-id :flocking-canvas) context (utils/get-context canvas "2d")]
+           (utils/clear-canvas context dimensions)
+           (doseq [position positions]
+                  (utils/fill-rect context  230 200  20 (nth position 0) (nth position 1) 10 10)))
+      positions)
+
+(defn update [positions] (map (fn [position] [(+ (rand-int 10) (nth position 0)) (+ (rand-int 10) (nth position 1))]) positions))
+
+
+(defn game-loop [positions] (utils/wait (fn [] (game-loop(render (update positions)))) time-step))
 
 (defn ^:export flock []
       (header)
-      (canvas))
+      (game-loop initial-positions))
