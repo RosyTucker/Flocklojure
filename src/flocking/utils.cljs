@@ -33,9 +33,12 @@
 (defn get-context [target dim]
       (.getContext target "2d"))
 
-(defn fill-rect [context r g b left top width height]
-      (set! (.-fillStyle context) (str "rgb(" r "," g "," b ")"))
+(defn fill-rect [context color left top width height]
+      (set! (.-fillStyle context) color)
       (.fillRect context left top width height))
 
 (defn wait [update timestep]
       (js/setTimeout update timestep))
+
+(defn rand-color []
+      (str "rgb(" (rand-int 255) "," (rand-int 255) "," (rand-int 255) ")"))

@@ -18,7 +18,7 @@
       (let [canvas (utils/by-id :flocking-canvas) context (utils/get-context canvas "2d")]
            (utils/clear-canvas context dimensions)
            (doseq [position positions]
-                  (utils/fill-rect context  230 200  20 (nth position 0) (nth position 1) 10 10)))
+                  (utils/fill-rect context  (utils/rand-color) (nth position 0) (nth position 1) 10 10)))
       positions)
 
 (defn update [positions] (map (fn [position] [(+ (rand-int 10) (nth position 0)) (+ (rand-int 10) (nth position 1))]) positions))
