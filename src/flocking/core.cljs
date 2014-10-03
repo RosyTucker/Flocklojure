@@ -4,7 +4,7 @@
 (enable-console-print!)
 
 (def num-boids 1000)
-(def time-step 1000)
+(def time-step 50)
 
 (def dimensions {:width 1200 :height 800})
 
