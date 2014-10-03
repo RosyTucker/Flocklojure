@@ -6,14 +6,9 @@
 
 (def num-boids 1000)
 (def time-step 50)
-
 (def dimensions {:width 1200 :height 800})
 
 (def initial-positions (map (fn [x] [(rand-int (dimensions :width)) (rand-int (dimensions :height))]) (range num-boids)))
-
-(defn header []
-      (let [header (utils/by-id :header)]
-           (utils/set-html! header "Hello World")))
 
 (defn render [positions]
       (let [canvas (utils/by-id :flocking-canvas) context (utils/get-context canvas "2d")]
@@ -27,5 +22,4 @@
 (defn game-loop [positions] (utils/wait (fn [] (game-loop (render (update positions)))) time-step))
 
 (defn ^:export flock []
-      (header)
       (game-loop initial-positions))
