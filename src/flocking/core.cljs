@@ -10,14 +10,15 @@
 
 (defn boid-position [x y] {:x x :y y})
 
-(def initial-positions (map (fn [x] (boid-position (rand-int (dimensions :width)) (rand-int (dimensions :height)))) (range num-boids)))
+(def initial-positions
+  (map (fn [x](boid-position (rand-int (dimensions :width)) (rand-int (dimensions :height))))
+       (range num-boids)))
 
 (defn render [positions]
       (let [canvas (utils/by-id :flocking-canvas) context (utils/get-context canvas "2d")]
            (utils/clear-canvas context dimensions)
            (doseq [position positions]
-                  (utils/fill-rect context (utils/rand-color) (position :x) (position :y) 10 10)))
-      positions)
+                  (utils/fill-rect context (utils/rand-color) (position :x) (position :y) 10 10))) positions)
 
 (defn update [positions] (map (fn [position] (boid-position (+ 10 (position :x)) (+ 10 (position :y))) ) positions))
 
