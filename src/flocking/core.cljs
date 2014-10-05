@@ -1,6 +1,5 @@
 (ns flocking.core
-  (:require [flocking.utils :as utils])
-  (:import [java.lang.Integer]))
+  (:require [flocking.utils :as utils]))
 
 (enable-console-print!)
 
@@ -15,20 +14,27 @@
 (defn boid-position [x y] {:x x :y y})
 (defn boid-velocity [dx dy] {:dx dx :dy dy})
 (defn boid [position velocity] {:position position :velocity velocity})
+
 (defn rand-position [max-x max-y] (boid-position (rand-int max-x) (rand-int max-y)))
-(defn rand-velocity [max-dx max-dy] (boid-velocity (rand-int max-dx) (rand-int max-dy)))
+(defn rand-velocity [max-dx max-dy] (boid-velocity (rand max-dx) (rand max-dy)))
+(defn rand-boid [] (boid (rand-position (dimensions :width) (dimensions :height))(rand-velocity 1 1)))
 
+(def initial-boids (map (fn [] (rand-boid)) (range num-boids)))
 
-(def initial-positions (map (fn [](rand-position (dimensions :width) (dimensions :height))) (range num-boids)))
-
-(defn render [positions]
+(defn render [boids]
       (let [canvas (utils/by-id :flocking-canvas) context (utils/get-context canvas "2d")]
            (utils/clear-canvas context dimensions)
-           (doseq [position positions]
-                  (utils/fill-rect context (utils/rand-color) (position :x) (position :y) boid-size boid-size))) positions)
+           (doseq [current-boid boids]
+                  (utils/fill-rect context (utils/rand-color) ((current-boid :position) :x) ((current-boid :position) :y)
+                                   boid-size boid-size))) boids)
 
-(defn update [positions] (map (fn [position] (boid-position (+ 10 (position :x)) (+ 10 (position :y))) ) positions))
+(defn update [boids] (map (fn [current-boid]
+                            (boid (boid-position (+ 10 ((current-boid :position) :x)) (+ 10 ((current-boid :position) :y)))
+                                   (boid-velocity (+ 10 ((current-boid :velocity) :dx)) (+ 10 ((current-boid :velocity) :dy)))
+                                   )) boids))
 
-(defn game-loop [positions] (utils/wait (fn [] (game-loop (render (update positions)))) time-step))
+(defn game-loop [boids] (utils/wait (fn [] (game-loop (render (update boids)))) time-step))
 
-(defn ^:export flock [] (game-loop initial-positions))
+(defn ^:export flock []
+  (game-loop initial-boids)
+  )
