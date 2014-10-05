@@ -6,20 +6,24 @@
 
 (def num-boids 1000)
 (def time-step 50)
+(def repulsion-zone 50)
+(def boid-size 10)
+(def orientation-zone 100)
+(def attraction-zone 150)
 (def dimensions {:width 1200 :height 800})
+
 (defn boid-position [x y] {:x x :y y})
 (defn boid-velocity [dx dy] {:dx dx :dy dy})
 (defn boid [position velocity] {:position position :velocity velocity})
+(defn rand-position [max-x max-y] (boid-position (rand-int (dimensions max-x)) (rand-int (dimensions max-y))))
 
-(def initial-positions
-  (map (fn [x](boid-position (rand-int (dimensions :width)) (rand-int (dimensions :height))))
-       (range num-boids)))
+(def initial-positions (map (fn [](rand-position :width :height)) (range num-boids)))
 
 (defn render [positions]
       (let [canvas (utils/by-id :flocking-canvas) context (utils/get-context canvas "2d")]
            (utils/clear-canvas context dimensions)
            (doseq [position positions]
-                  (utils/fill-rect context (utils/rand-color) (position :x) (position :y) 10 10))) positions)
+                  (utils/fill-rect context (utils/rand-color) (position :x) (position :y) boid-size boid-size))) positions)
 
 (defn update [positions] (map (fn [position] (boid-position (+ 10 (position :x)) (+ 10 (position :y))) ) positions))
 
